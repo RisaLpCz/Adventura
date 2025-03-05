@@ -11,7 +11,6 @@ public class Lokace {
     public Lokace(String name, int ID, String[] locations) {
         this.name = name;
         this.ID = ID;
-        this.locations = new int[3];
         if (locations != null && locations.length > 0) {
             this.locations = new int[locations.length];
             for (int i = 0; i < locations.length; i++) {
