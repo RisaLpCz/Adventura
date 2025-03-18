@@ -2,8 +2,10 @@ package Characters;
 
 public class Nepritel {
 
-    public void lose(Hrac hrac) {}
-
-    public void confront(Hrac hrac) {}
-
+    public String lose(Postava postava) {
+        if (postava.getDrink() >= 5 && postava.getFood() <= 5) {
+            return "You escaped the enenmy!";
+        }
+        return "You cannot escape!";
+    }
 }

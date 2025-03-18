@@ -1,10 +1,22 @@
 package Command;
 
 import Characters.Hrac;
+import World.Lokace;
 
-public class Search {
+public class Search implements Command {
 
-    public void search(Hrac hrac) {}
+    private Lokace lokace;
 
-    public void leave(Hrac hrac) {}
+    @Override
+    public String execute() {
+        if (!lokace.getItems().isEmpty()) {
+            return "You have found these items " + lokace.getItems();
+        }
+        return "No items found";
+    }
+
+    @Override
+    public boolean exit() {
+        return false;
+    }
 }

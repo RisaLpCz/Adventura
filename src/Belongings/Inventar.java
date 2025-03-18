@@ -1,14 +1,59 @@
 package Belongings;
 
+import Settings.SETTINGS;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Inventar {
 
-    public void addItem(Item item) {}
+    private ArrayList<Item> items;
+    private Scanner scanner = new Scanner(System.in);
 
-    public void removeItem(Item item) {}
 
-    public void containesItem(Item item) {}
+    public boolean addItem(Item item) {
+        if (items.size() <= SETTINGS.INVENTORYSIZE && item != null) {
+            items.add(item);
+            return true;
+        }
+        return false;
+    }
 
-    public void isEmpty() {}
+    public boolean removeItem(String itemName) {
+        Item item = containsItem(itemName);
 
-    public void isFull() {}
+        if (item != null) {
+            items.remove(item);
+            return true;
+        }
+        return false;
+    }
+
+    public Item containsItem(String itemName) {
+        for (Item item : items) {
+            if (itemName.equalsIgnoreCase(item.getName())) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean isEmpty() {
+        if (items.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFull() {
+        if (items.size() == SETTINGS.INVENTORYSIZE) {
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
 }

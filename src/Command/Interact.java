@@ -1,14 +1,25 @@
 package Command;
 
+import Belongings.Inventar;
 import Characters.Hrac;
+import Belongings.Item;
 
-public class Interact {
+public class Interact implements Command {
 
-    public void isUsable(Hrac hrac) {}
+    private Inventar inventar;
+    private Item item;
 
-    public void eat(Hrac hrac) {}
+    @Override
+    public String execute() {
+        System.out.println("Item " + item.getName() + " is " + item.discription());
+        //item getDiscripiton
+        //case what do you want to do with it
+        //case item.isUsable usetIt?... isEatable... EatIt?
+        return "You used your item";
+    }
 
-    public void drink(Hrac hrac) {}
-
-    public void destroy(Hrac hrac) {}
+    @Override
+    public boolean exit() {
+        return false;
+    }
 }
