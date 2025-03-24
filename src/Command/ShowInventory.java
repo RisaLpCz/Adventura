@@ -1,10 +1,11 @@
 package Command;
 
 import Belongings.Inventar;
+import Characters.Hrac;
 
 public class ShowInventory implements Command {
 
-    private Inventar inventar = new Inventar();
+    private Inventar inventar = Hrac.getInventar();
 
     @Override
     public String execute() {

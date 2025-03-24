@@ -3,6 +3,7 @@ package World;
 import java.io.*;
 import java.util.*;
 import Belongings.Item;
+import Characters.Postava;
 
 public class Svet {
     private HashMap<Integer, Lokace> world = new HashMap<>();
@@ -31,8 +32,10 @@ public class Svet {
         }
     }
 
+
     public void zmenLokaci() {
-        BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Random random = new Random();
 
         while (true) {
             Lokace currentLocation = world.get(currentPosition);
@@ -60,6 +63,20 @@ public class Svet {
                 if (choice == 0) {
                     System.out.println("Zůstáváte v aktuální lokaci.");
                 } else if (isValidChoice(choice, connectedLocations)) {
+                    double drunkenness = Postava.getDrunkenness();
+                    Postava.setDrunkenness(drunkenness - 0.5);
+
+                    if (drunkenness > 2 && random.nextDouble() < 0.5) {
+                        choice = connectedLocations[random.nextInt(connectedLocations.length)];
+                        System.out.println("Jste moc opilý a omylem jste se vydali jinam...");
+                    } else if (drunkenness > 1 && random.nextDouble() < 0.25) {
+                        choice = connectedLocations[random.nextInt(connectedLocations.length)];
+                        System.out.println("Motáte se trochu a nakonec jdete jinam...");
+                    } else if (drunkenness > 0.5 && random.nextDouble() < 0.1) {
+                        choice = connectedLocations[random.nextInt(connectedLocations.length)];
+                        System.out.println("Zavrávorali jste a nechtěně jste se vydali jinam...");
+                    }
+
                     currentPosition = choice;
                     System.out.println("Přesouváte se do lokace " + choice);
                 } else {
@@ -79,6 +96,7 @@ public class Svet {
         }
         return false;
     }
+
 
     public Lokace getCurrentPosition() {
         return world.get(currentPosition);

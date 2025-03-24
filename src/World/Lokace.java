@@ -1,6 +1,8 @@
 package World;
 
 import Belongings.Item;
+import Belongings.ItemRegister;
+import Settings.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +30,7 @@ public class Lokace {
         this.lokaceItems = new ArrayList<>();
         if (items != null && items.length > 0) {
             for (String itemName : items) {
-                this.lokaceItems.add(new Item(itemName.trim()));
+                // this.lokaceItems.add(new Item(itemName.trim()));
             }
         }
     }
@@ -45,6 +47,33 @@ public class Lokace {
         return null;
     }
 
+    public void addLocationItems() {
+        Controller controller = new Controller();
+        Svet svet = controller.getSvet();
+        Lokace lokace = svet.getCurrentPosition();
+        switch (lokace.getID()) {
+            case 1:
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Beer"));
+                lokace.addItem(new Item(50));
+                break;
+            case 2:
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Food"));
+                lokace.addItem(new Item(50));
+                break;
+            case 3:
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Water"));
+                break;
+            case 4:
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Food"));
+                break;
+            case 5:
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Water"));
+                lokace.addItem(new Item(50));
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Food"));
+                break;
+        }
+    }
+
     public int[] getLocations() {
         return locations;
     }
@@ -55,6 +84,18 @@ public class Lokace {
 
     public void addItem(Item item) {
         lokaceItems.add(item);
+    }
+
+    public void removeItem(Item item) {
+        lokaceItems.remove(item);
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

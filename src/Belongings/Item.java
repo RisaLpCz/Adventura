@@ -2,40 +2,53 @@ package Belongings;
 
 public class Item {
     private String name;
-    private boolean usable;
-    private boolean drinkable;
-    private boolean eatable;
+    private String description;
+    private int drink;
+    private int food;
+    private int drunkenness;
+    private int amount;
+    private boolean useable;
+    private boolean isMoney;
 
-    public Item(String name) {
-        this.name = name;
+    public Item(String name, String description, int drink, int food, int drunkenness, boolean useable) {
+        setName(name);
+        setDescription(description);
+        setDrink(drink);
+        setFood(food);
+        setDrunkenness(drunkenness);
+        setUseable(useable);
     }
 
-    public String discription() {
-        return "Item " + name + " is " + isUsable() + " and is " + isDrinkable() + " and is " + isEatable();
+    public Item(int amount) {
+        setName("Money");
+        setDescription("adds some coins to your wallet");
+        setAmount(amount);
+        this.isMoney = true;
     }
 
-    public boolean isUsable() {
-        return usable;
+    public Item() {
     }
 
-    public void setUsable(boolean usable) {
-        this.usable = usable;
+    public Item(String name, String description, boolean useable) {
+        setName(name);
+        setDescription(description);
+        setUseable(useable);
     }
 
-    public boolean isDrinkable() {
-        return drinkable;
+    public int getDrunkenness() {
+        return drunkenness;
     }
 
-    public void setDrinkable(boolean drinkable) {
-        this.drinkable = drinkable;
+    public void setDrunkenness(int drunkenness) {
+        this.drunkenness = drunkenness;
     }
 
-    public boolean isEatable() {
-        return eatable;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEatable(boolean eatable) {
-        this.eatable = eatable;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
@@ -44,6 +57,46 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getFood() {
+        return food;
+    }
+
+    public void setFood(int food) {
+        this.food = food;
+    }
+
+    public int getDrink() {
+        return drink;
+    }
+
+    public void setDrink(int drink) {
+        this.drink = drink;
+    }
+
+    public boolean isUseable() {
+        return useable;
+    }
+
+    public void setUseable(boolean useable) {
+        this.useable = useable;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public boolean isMoney() {
+        return isMoney;
+    }
+
+    public void setMoney(boolean money) {
+        isMoney = money;
     }
 
     @Override

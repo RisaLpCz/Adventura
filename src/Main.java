@@ -1,11 +1,10 @@
-import Console.Konzole;
-import World.Svet;
+import Settings.Controller;
 
 public class Main {
     public static void main(String[] args) {
-    Svet svet = new Svet();
-    svet.loadMap();
-        Konzole konzole = new Konzole();
-        konzole.start();
+    Controller controller = new Controller();
+    controller.incialization();
+    controller.getSvet().loadMap();
+    controller.getKonzole().start();
     }
 }

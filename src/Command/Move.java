@@ -1,5 +1,6 @@
 package Command;
 
+import Characters.Postava;
 import World.Svet;
 
 public class Move implements Command{

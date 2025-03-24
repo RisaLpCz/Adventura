@@ -1,63 +1,68 @@
 package Characters;
 
-public class Postava {
-    private String name = "Huby";
-    private int money;
-    private int food;
-    private int drink;
+import Settings.SETTINGS;
 
-    public Postava(String name, int money, int food, int drink) {
-        this.name = name;
-        this.money = money;
-        this.food = food;
-        this.drink = drink;
+public class Postava {
+    private static String name;
+    private static int money;
+    private static int food;
+    private static int drink;
+    private static double drunkenness;
+
+    public static void postava() {
+        name = "Huby";
+        money = SETTINGS.STARTING_MONEY;
+        food = SETTINGS.MAX_FOOD;
+        drink = SETTINGS.MAX_HYDRATION;
+        drunkenness = 0;
     }
 
-    public void offer(Hrac hrac) {}
+    public static void eat() {
+        setFood(getFood() + 4);
+    }
 
-    public void give(Hrac hrac) {}
+    public static void drink() {
+        setDrink(getDrink() + 3);
+        setDrunkenness(getDrunkenness() - 0.5);
+    }
 
-    public void buy(Hrac hrac) {}
-
-    public void sell(Hrac hrac) {}
-
-    public void lend(Hrac hrac) {}
-
-    public void eat(Hrac hrac) {}
-
-    public void drink(Hrac hrac) {}
-
-    public void use(Hrac hrac) {}
-
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public static void setName(String name) {
+        Postava.name = name;
     }
 
-    public int getMoney() {
+    public static int getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public static void setMoney(int money) {
+        Postava.money = money;
     }
 
-    public int getFood() {
+    public static int getFood() {
         return food;
     }
 
-    public void setFood(int food) {
-        this.food = food;
+    public static void setFood(int food) {
+        Postava.food = food;
     }
 
-    public int getDrink() {
+    public static int getDrink() {
         return drink;
     }
 
-    public void setDrink(int drink) {
-        this.drink = drink;
+    public static void setDrink(int drink) {
+        Postava.drink = drink;
+    }
+
+    public static double getDrunkenness() {
+        return drunkenness;
+    }
+
+    public static void setDrunkenness(double drunkenness) {
+        Postava.drunkenness = drunkenness;
     }
 }

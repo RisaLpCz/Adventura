@@ -1,6 +1,6 @@
-1;HospodskáRuina;2,5,4;Půlitr, StaráMince, RozbitýMeč
-2;OpatstvíSv.Matouše;1,5;SvatýPergamen, Kadidlo, StarobylýKlíč
-3;ZříceninaKeltskéhoOppida;2;RunovýKámen, DřevěnýAmulet
-4;DoupěLichvářeHoryny;1,5;ZlatáMince, StříbrnýPohár, PytelDrahokamů
-5;LesUMacochy;1,2,4;BylinnýLektvar, LoveckýLuk, KouzelnáHůlka
-6;JeskyněVěčnéhoStínu;1;ČernýKrystal, StarodávnýMeč, SvitěkTemnoty
+1;HospodskáRuina;2,5,4;Nedopite pivo, Penize
+2;OpatstvíSv.Matouše;1,5;Jidlo, Penize
+3;ZříceninaKeltskéhoOppida;2;Voda
+4;DoupěLichvářeHoryny;1,5;Jidlo
+5;LesUMacochy;1,2,4;Voda, Penize, Jidlo
+6;JeskyněVěčnéhoStínu;1;

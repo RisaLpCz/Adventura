@@ -4,17 +4,25 @@ import Belongings.Inventar;
 import Characters.Hrac;
 import Belongings.Item;
 
+import java.util.Scanner;
+
 public class Interact implements Command {
 
-    private Inventar inventar;
-    private Item item;
+    Scanner scanner = new Scanner(System.in);
 
     @Override
     public String execute() {
-        System.out.println("Item " + item.getName() + " is " + item.discription());
-        //item getDiscripiton
-        //case what do you want to do with it
-        //case item.isUsable usetIt?... isEatable... EatIt?
+        Inventar inventar = Hrac.getInventar();
+        Item item = inventar.containsItem(scanner.nextLine());
+
+        if (item != null) {
+
+        }
+
+
+        System.out.println(item.getName() + " " + item.getDescription());
+        //case item.isUsable usetIt?...
+        scanner.close();
         return "You used your item";
     }
 

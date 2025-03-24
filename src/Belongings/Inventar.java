@@ -1,18 +1,19 @@
 package Belongings;
 
+import Characters.Postava;
 import Settings.SETTINGS;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class Inventar {
 
     private ArrayList<Item> items;
-    private Scanner scanner = new Scanner(System.in);
-
 
     public boolean addItem(Item item) {
-        if (items.size() <= SETTINGS.INVENTORYSIZE && item != null) {
+        if (item.isMoney()) {
+            Postava.setMoney(Postava.getMoney() + item.getAmount());
+            System.out.println("You received " + item.getAmount() + " coins!");
+        }
+        else if (items.size() <= SETTINGS.INVENTORYSIZE && item != null) {
             items.add(item);
             return true;
         }
@@ -37,7 +38,6 @@ public class Inventar {
         }
         return null;
     }
-
 
     public boolean isEmpty() {
         if (items.isEmpty()) {
