@@ -7,9 +7,14 @@ import World.Svet;
 
 public class Search implements Command {
 
-    private Controller controller = new Controller();
-    private Svet svet = controller.getSvet();
+    private Controller controller;
+    private Svet svet;
     private Lokace lokace;
+
+    public Search(Controller controller) {
+        this.controller = controller;
+        this.svet = controller.getSvet();
+    }
 
     @Override
     public String execute() {

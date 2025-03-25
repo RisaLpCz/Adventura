@@ -17,13 +17,8 @@ public class Postava {
         drunkenness = 0;
     }
 
-    public static void eat() {
-        setFood(getFood() + 4);
-    }
-
-    public static void drink() {
-        setDrink(getDrink() + 3);
-        setDrunkenness(getDrunkenness() - 0.5);
+    public static String playerStete() {
+        return "You have " + getMoney() + " crowns in your wallet " + "your hunger is " + getFood() + "/" + SETTINGS.MAX_FOOD + ", thirst " + getDrink() + "/" + SETTINGS.MAX_HYDRATION + ", drunkenness " + getDrunkenness();
     }
 
     public static String getName() {

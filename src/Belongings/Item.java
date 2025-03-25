@@ -1,5 +1,8 @@
 package Belongings;
 
+import Characters.Postava;
+import Settings.Controller;
+
 public class Item {
     private String name;
     private String description;
@@ -33,6 +36,12 @@ public class Item {
         setName(name);
         setDescription(description);
         setUseable(useable);
+    }
+
+    public void useItem(Item item) {
+        Postava.setDrink(Postava.getDrink() + item.getDrink());
+        Postava.setFood(Postava.getFood() + item.getFood());
+        Postava.setDrunkenness(Postava.getDrunkenness() + item.getDrunkenness());
     }
 
     public int getDrunkenness() {

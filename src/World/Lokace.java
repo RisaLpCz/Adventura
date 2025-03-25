@@ -59,17 +59,21 @@ public class Lokace {
             case 2:
                 lokace.addItem(ItemRegister.ItemRegistry.getItem("Food"));
                 lokace.addItem(new Item(50));
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Map"));
                 break;
             case 3:
                 lokace.addItem(ItemRegister.ItemRegistry.getItem("Water"));
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Celtic symbols"));
                 break;
             case 4:
                 lokace.addItem(ItemRegister.ItemRegistry.getItem("Food"));
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Note in a bottle"));
                 break;
             case 5:
                 lokace.addItem(ItemRegister.ItemRegistry.getItem("Water"));
                 lokace.addItem(new Item(50));
                 lokace.addItem(ItemRegister.ItemRegistry.getItem("Food"));
+                lokace.addItem(ItemRegister.ItemRegistry.getItem("Bison hoof"));
                 break;
         }
     }
@@ -100,11 +104,6 @@ public class Lokace {
 
     @Override
     public String toString() {
-        return "World.Lokace{" +
-                "name='" + name + '\'' +
-                ", ID=" + ID +
-                ", locations=" + Arrays.toString(locations) +
-                ", items=" + lokaceItems +
-                '}';
+        return name;
     }
 }

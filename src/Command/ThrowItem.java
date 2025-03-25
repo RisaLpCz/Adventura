@@ -12,16 +12,21 @@ import java.util.Scanner;
 public class ThrowItem implements Command {
 
     private Scanner sc = new Scanner(System.in);
-    private Controller controller = new Controller();
+    private Controller controller;
     private Inventar inventar = Hrac.getInventar();
-    private Svet svet = controller.getSvet();
+    private Svet svet;
     private Item item;
     private Lokace lokace;
 
+    public ThrowItem(Controller controller) {
+        this.controller = controller;
+        this.svet = controller.getSvet();
+    }
 
     @Override
     public String execute() {
         lokace = svet.getCurrentPosition();
+        System.out.println("choose which item you want to throw away");
         String itemName = sc.nextLine();
         if (inventar.removeItem(itemName)) {
             this.item = inventar.containsItem(itemName);

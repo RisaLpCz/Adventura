@@ -13,12 +13,17 @@ import java.util.Scanner;
 
 public class TakeItem implements Command {
 
-    private Controller controller = new Controller();
-    private Svet svet = controller.getSvet();
+    private Controller controller;
+    private Svet svet;
     private Lokace lokace;
     private Inventar inventar = Hrac.getInventar();
     private Item item;
     private Scanner scanner = new Scanner(System.in);
+
+    public TakeItem(Controller controller) {
+        this.controller = controller;
+        this.svet = controller.getSvet();
+    }
 
     @Override
     public String execute() {
@@ -26,6 +31,7 @@ public class TakeItem implements Command {
         item = chooseItem();
         if (item != null && !inventar.isFull()) {
             lokace.removeItem(item);
+            inventar.addItem(item);
             return "You added " + getItem().getName() + " to your inventory";
         } else if (inventar.isFull()) {
             return "Your inventory is full";

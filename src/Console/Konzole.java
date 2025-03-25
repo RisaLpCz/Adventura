@@ -3,6 +3,7 @@ package Console;
 import Characters.Hrac;
 import Command.*;
 import Command.Exit;
+import Settings.Controller;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -11,15 +12,23 @@ public class Konzole {
     private boolean exit = false;
     private HashMap<String, Command> map = new HashMap<>();
 
+    Controller controller;
+
     public void inicialization() {
-        map.put("goto", new Move());
+        controller = new Controller();
+        System.out.println("Type your name: ");
+        controller.incialization();
+        controller.getSvet().loadMap();
+
+        map.put("goto", new Move(controller));
         map.put("showinventory", new ShowInventory());
-        map.put("search", new Search());
-        map.put("stopplaying", new Exit());
-        map.put("takeitem", new TakeItem());
-        map.put("throwitem", new ThrowItem());
+        map.put("search", new Search(controller));
+        map.put("stop", new Exit());
+        map.put("takeitem", new TakeItem(controller));
+        map.put("throwitem", new ThrowItem(controller));
         map.put("interact", new Interact());
     }
+
 
     private Scanner scanner = new Scanner(System.in);
 

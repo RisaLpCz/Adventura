@@ -15,7 +15,6 @@ public class Controller {
     Hrac hrac;
     Nepritel nepritel;
     Svet svet;
-    Konzole konzole;
 
     public Controller() {
     }
@@ -24,7 +23,6 @@ public class Controller {
         hrac = new Hrac(scan.nextLine());
         nepritel = new Nepritel();
         svet = new Svet();
-        konzole = new Konzole();
         Postava.postava();
     }
 
@@ -40,7 +38,4 @@ public class Controller {
         return svet;
     }
 
-    public Konzole getKonzole() {
-        return konzole;
-    }
 }
