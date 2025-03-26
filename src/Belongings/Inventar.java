@@ -4,6 +4,9 @@ import Characters.Postava;
 import Settings.SETTINGS;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Inventar {
 
@@ -58,6 +61,28 @@ public class Inventar {
             return true;
         }
         return false;
+    }
+
+    public String getFormattedItems() {
+        if (items.isEmpty()) {
+            return "Inventory is empty";
+        }
+
+        HashMap<String, Integer> itemCounts = new HashMap<>();
+        for (Item item : items) {
+            itemCounts.put(item.getName(), itemCounts.getOrDefault(item.getName(), 0) + 1);
+        }
+
+        ArrayList<String> formattedItems = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : itemCounts.entrySet()) {
+            if (entry.getValue() > 1) {
+                formattedItems.add(entry.getValue() + "x " + entry.getKey());
+            } else {
+                formattedItems.add(entry.getKey());
+            }
+        }
+
+        return String.join(", ", formattedItems);
     }
 
     public ArrayList<Item> getItems() {

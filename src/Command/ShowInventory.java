@@ -9,8 +9,8 @@ public class ShowInventory implements Command {
 
     @Override
     public String execute() {
-        if (!inventar.getItems().isEmpty()) {
-            return "You have " + inventar.getItems() + " in your inventory";
+        if (!inventar.getFormattedItems().isEmpty()) {
+            return "You have " + inventar.getFormattedItems() + " in your inventory";
         }
         return "Your inventory is empty";
     }

@@ -32,7 +32,7 @@ public class TakeItem implements Command {
         if (item != null && !inventar.isFull()) {
             lokace.removeItem(item);
             inventar.addItem(item);
-            return "You added " + getItem().getName() + " to your inventory";
+            return "You added " + item.getName() + " to your inventory";
         } else if (inventar.isFull()) {
             return "Your inventory is full";
         }

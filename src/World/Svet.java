@@ -12,8 +12,10 @@ public class Svet {
     private HashMap<Integer, Lokace> world = new HashMap<>();
     private int start = 1;
     private int currentPosition = start;
+    private String test;
 
     public Svet() {
+        this.test = "NASTAVUJI TEST NA NEJAKE JMENO";
         if (!loadMap()) {
             System.out.println("Svet load failed");
         }
@@ -125,5 +127,12 @@ public class Svet {
 
     public HashMap<Integer, Lokace> getWorld() {
         return world;
+    }
+
+    @Override
+    public String toString() {
+        return "Svet{" +
+                "test='" + test + '\'' +
+                '}';
     }
 }

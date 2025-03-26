@@ -19,7 +19,7 @@ public class Search implements Command {
     @Override
     public String execute() {
         lokace = svet.getCurrentPosition();
-        lokace.addLocationItems();
+        lokace.addLocationItems(lokace);
         if (!lokace.getItems().isEmpty()) {
             return "You have found these items " + lokace.getItems();
         }

@@ -30,7 +30,7 @@ public class Lokace {
         this.lokaceItems = new ArrayList<>();
         if (items != null && items.length > 0) {
             for (String itemName : items) {
-                // this.lokaceItems.add(new Item(itemName.trim()));
+                this.lokaceItems.add((ItemRegister.ItemRegistry.getItem(itemName)));
             }
         }
     }
@@ -47,10 +47,7 @@ public class Lokace {
         return null;
     }
 
-    public void addLocationItems() {
-        Controller controller = new Controller();
-        Svet svet = controller.getSvet();
-        Lokace lokace = svet.getCurrentPosition();
+    public void addLocationItems(Lokace lokace) {
         switch (lokace.getID()) {
             case 1:
                 lokace.addItem(ItemRegister.ItemRegistry.getItem("Beer"));

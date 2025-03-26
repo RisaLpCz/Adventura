@@ -29,9 +29,6 @@ public class Item {
         this.isMoney = true;
     }
 
-    public Item() {
-    }
-
     public Item(String name, String description, boolean useable) {
         setName(name);
         setDescription(description);
