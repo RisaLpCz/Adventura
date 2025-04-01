@@ -2,6 +2,9 @@ package Characters;
 
 import Settings.SETTINGS;
 
+/**
+ * Reprezentuje herní postavu hráče s vlastnostmi jako jméno, peníze, hlad, žízeň a opilost.
+ */
 public class Postava {
     private static String name;
     private static int money;
@@ -9,6 +12,9 @@ public class Postava {
     private static int drink;
     private static double drunkenness;
 
+    /**
+     * Inicializuje výchozí stav postavy.
+     */
     public static void postava() {
         name = "Huby";
         money = SETTINGS.STARTING_MONEY;
@@ -17,8 +23,16 @@ public class Postava {
         drunkenness = 0;
     }
 
+    /**
+     * Vrátí aktuální stav hráče ve formě čitelného textu.
+     *
+     * @return Řetězec popisující aktuální stav hráče.
+     */
     public static String playerStete() {
-        return "You have " + getMoney() + " crowns in your wallet " + "your hunger is " + getFood() + "/" + SETTINGS.MAX_FOOD + ", thirst " + getDrink() + "/" + SETTINGS.MAX_HYDRATION + ", drunkenness " + getDrunkenness();
+        return "You have " + getMoney() + " crowns in your wallet " +
+                "your hunger is " + getFood() + "/" + SETTINGS.MAX_FOOD +
+                ", thirst " + getDrink() + "/" + SETTINGS.MAX_HYDRATION +
+                ", drunkenness " + getDrunkenness();
     }
 
     public static String getName() {

@@ -8,10 +8,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Třída představuje inventář postavy ve hře.
+ * Umožňuje přidávat, odebírat a kontrolovat předměty.
+ */
 public class Inventar {
 
     private ArrayList<Item> items = new ArrayList<>();
 
+    /**
+     * Přidá položku do inventáře nebo přidá peníze, pokud jde o peněžní předmět.
+     *
+     * @param item Přidávaný předmět.
+     * @return pokud byl předmět úspěšně přidán.
+     */
     public boolean addItem(Item item) {
         if (item.isMoney()) {
             Postava.setMoney(Postava.getMoney() + item.getAmount());
@@ -23,9 +33,14 @@ public class Inventar {
         return false;
     }
 
+    /**
+     * Odebere položku z inventáře podle názvu.
+     *
+     * @param itemName Název předmětu k odstranění.
+     * @return pokud byl předmět nalezen a odstraněn.
+     */
     public boolean removeItem(String itemName) {
         Item item = containsItem(itemName);
-
         if (item != null) {
             items.remove(item);
             return true;
@@ -33,6 +48,26 @@ public class Inventar {
         return false;
     }
 
+    /**
+     * Odebere konkrétní instanci předmětu z inventáře.
+     *
+     * @param item Předmět k odstranění.
+     * @return pokud byl předmět odstraněn.
+     */
+    public boolean removeItem(Item item) {
+        if (item != null) {
+            items.remove(item);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Zkontroluje, zda se v inventáři nachází předmět se zadaným názvem.
+     *
+     * @param itemName Název hledaného předmětu.
+     * @return Nalezený předmět.
+     */
     public Item containsItem(String itemName) {
         for (Item item : items) {
             if (itemName.equalsIgnoreCase(item.getName())) {
@@ -42,6 +77,11 @@ public class Inventar {
         return null;
     }
 
+    /**
+     * Ověří, zda hráč nasbíral všechny důležité předměty.
+     *
+     * @return pokud jsou všechny klíčové předměty v inventáři, jinak.
+     */
     public boolean allItemsCollected() {
         return containsItem("Map") != null &&
                 containsItem("Note in a bottle") != null &&
@@ -49,20 +89,29 @@ public class Inventar {
                 containsItem("Bison hoof") != null;
     }
 
+    /**
+     * Ověří, zda je inventář prázdný.
+     *
+     * @return pokud je inventář prázdný, jinak.
+     */
     public boolean isEmpty() {
-        if (items.isEmpty()) {
-            return true;
-        }
-        return false;
+        return items.isEmpty();
     }
 
+    /**
+     * Ověří, zda je inventář plný.
+     *
+     * @return pokud je počet předmětů roven maximální kapacitě inventáře.
+     */
     public boolean isFull() {
-        if (items.size() == SETTINGS.INVENTORYSIZE) {
-            return true;
-        }
-        return false;
+        return items.size() == SETTINGS.INVENTORYSIZE;
     }
 
+    /**
+     * Vrátí seznam předmětů v inventáři ve formátovaném textu.
+     *
+     * @return Řetězec s přehledem předmětů v inventáři.
+     */
     public String getFormattedItems() {
         if (items.isEmpty()) {
             return "Inventory is empty";

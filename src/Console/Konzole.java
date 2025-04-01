@@ -8,17 +8,26 @@ import Settings.Controller;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Třída Konzole poskytuje uživatelské rozhraní pro komunikaci s hrou prostřednictvím textových příkazů.
+ * Zpracovává příkazy zadané uživatelem, vykonává odpovídající akce a poskytuje zpětnou vazbu.
+ */
 public class Konzole {
     private boolean exit = false;
     private HashMap<String, Command> map = new HashMap<>();
 
     Controller controller;
 
+    /**
+     * Inicializuje hru a připraví všechny potřebné komponenty pro spuštění.
+     * Vytváří instanci třídy Controller, načítá mapu světa a mapuje příkazy na příslušné implementace.
+     */
     public void inicialization() {
         controller = new Controller();
         System.out.println("Type your name: ");
         controller.incialization();
         controller.getSvet().loadMap();
+
 
         map.put("goto", new Move(controller));
         map.put("showinventory", new ShowInventory());
@@ -29,21 +38,31 @@ public class Konzole {
         map.put("interact", new Interact());
     }
 
-
     private Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Zpracovává příkaz zadaný uživatelem a vykonává odpovídající akci.
+     * Pokud příkaz není definován, informuje uživatele o neznámém příkazu.
+     */
     public void doCommand() {
         System.out.print(">>");
         String command = scanner.nextLine();
-        command = command.trim();
-        command = command.toLowerCase();
+        command = command.trim().toLowerCase();
         if (map.containsKey(command)) {
-            System.out.println(">> " + map.get(command).execute());
+            try {
+                System.out.println(">> " + map.get(command).execute());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         } else {
             System.out.println(">> Nondefined command");
         }
     }
 
+    /**
+     * Spustí hlavní cyklus konzole, který opakovaně přijímá příkazy od uživatele
+     * a vykonává je, dokud není hra ukončena.
+     */
     public void start() {
         inicialization();
         try {
@@ -53,11 +72,5 @@ public class Konzole {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public void message(Hrac hrac) {
-    }
-
-    public void clear(Hrac hrac) {
     }
 }

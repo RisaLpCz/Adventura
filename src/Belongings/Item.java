@@ -1,8 +1,14 @@
 package Belongings;
 
+import Characters.Hrac;
 import Characters.Postava;
 import Settings.Controller;
 
+/**
+ * Reprezentuje předmět ve hře, který může mít různé vlastnosti, například
+ * ovlivňovat hlad, žízeň nebo opilost postavy. Některé předměty mohou být použitelné,
+ * jiné slouží jako měna.
+ */
 public class Item {
     private String name;
     private String description;
@@ -13,6 +19,16 @@ public class Item {
     private boolean useable;
     private boolean isMoney;
 
+    /**
+     * Vytvoří nový předmět s definovanými vlastnostmi.
+     *
+     * @param name Název předmětu.
+     * @param description Popis předmětu.
+     * @param drink Hodnota zvyšující žízeň postavy.
+     * @param food Hodnota zvyšující hlad postavy.
+     * @param drunkenness Hodnota zvyšující opilost postavy.
+     * @param useable Určuje, zda je předmět použitelný.
+     */
     public Item(String name, String description, int drink, int food, int drunkenness, boolean useable) {
         setName(name);
         setDescription(description);
@@ -22,24 +38,45 @@ public class Item {
         setUseable(useable);
     }
 
+    /**
+     * Vytvoří nový předmět představující peníze.
+     *
+     * @param amount Množství peněz.
+     */
     public Item(int amount) {
         setName("Money");
-        setDescription("adds some coins to your wallet");
+        setDescription("Adds some coins to your wallet");
         setAmount(amount);
         this.isMoney = true;
     }
 
+    /**
+     * Vytvoří nový předmět bez specifických vlastností jako jídlo nebo pití.
+     *
+     * @param name Název předmětu.
+     * @param description Popis předmětu.
+     * @param useable Určuje, zda je předmět použitelný.
+     */
     public Item(String name, String description, boolean useable) {
         setName(name);
         setDescription(description);
         setUseable(useable);
     }
 
+    /**
+     * Použije daný předmět a aplikuje jeho efekty na postavu.
+     * Po použití je předmět odstraněn z inventáře hráče.
+     *
+     * @param item Předmět k použití.
+     */
     public void useItem(Item item) {
         Postava.setDrink(Postava.getDrink() + item.getDrink());
         Postava.setFood(Postava.getFood() + item.getFood());
         Postava.setDrunkenness(Postava.getDrunkenness() + item.getDrunkenness());
+        Hrac.getInventar().removeItem(item);
     }
+
+    // Gettery a settery
 
     public int getDrunkenness() {
         return drunkenness;
@@ -107,8 +144,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                '}';
+        return  name;
     }
 }

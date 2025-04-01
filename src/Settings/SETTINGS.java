@@ -1,5 +1,10 @@
 package Settings;
 
+/**
+ * Třída SETTINGS obsahuje konstanty, které definují základní parametry hry.
+ * Tyto parametry jsou použity pro nastavení maximální kapacity inventáře, množství jídla, pití,
+ * počáteční množství peněz, a specifické hodnoty pro různé předměty v hře.
+ */
 public class SETTINGS {
     public static final int INVENTORYSIZE = 10;
     public static final int MAX_FOOD = 10;

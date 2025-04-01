@@ -7,10 +7,22 @@ import Characters.Postava;
 
 import java.util.Scanner;
 
+/**
+ * Třída Interact implementuje příkaz pro použití předmětu z inventáře hráče.
+ * Umožňuje hráči vybrat předmět, který chce použít, a poté aktualizuje jeho stav.
+ *
+ * @implements Command
+ */
 public class Interact implements Command {
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Provádí použití vybraného předmětu z inventáře.
+     * Po použití předmětu aktualizuje stav hráče a vrátí zprávu o stavu po použití.
+     *
+     * @return Zpráva o použití předmětu a aktuálním stavu hráče.
+     */
     @Override
     public String execute() {
         Inventar inventar = Hrac.getInventar();
@@ -19,10 +31,9 @@ public class Interact implements Command {
 
         if (item != null && item.isUseable()) {
             item.useItem(item);
-            System.out.println("You have used " + item.getName() + " your current state is: " + Postava.playerStete());
+            return "You have used " + item.getName() + " your current state is: " + Postava.playerStete();
         }
-        scanner.close();
-        return "You used your item";
+        return "Item not found";
     }
 
     @Override

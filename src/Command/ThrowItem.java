@@ -9,6 +9,12 @@ import World.Svet;
 
 import java.util.Scanner;
 
+/**
+ * Třída ThrowItem implementuje příkaz pro vyhození předmětu z inventáře do aktuální lokace.
+ * Umožňuje hráči zvolit předmět, který chce vyhodit, a přidat ho zpět do lokace.
+ *
+ * @implements Command
+ */
 public class ThrowItem implements Command {
 
     private Scanner sc = new Scanner(System.in);
@@ -18,27 +24,38 @@ public class ThrowItem implements Command {
     private Item item;
     private Lokace lokace;
 
+    /**
+     * Konstruktor třídy ThrowItem.
+     * Inicializuje třídu ThrowItem a získává instanci Controller pro přístup k hernímu světu.
+     *
+     * @param controller Instance třídy Controller pro získání herního světa.
+     */
     public ThrowItem(Controller controller) {
         this.controller = controller;
         this.svet = controller.getSvet();
     }
 
+    /**
+     * Provádí vyhození předmětu z inventáře a přidání ho do aktuální lokace.
+     * Pokud předmět není v inventáři, vrátí informaci o chybě.
+     *
+     * @return Zpráva o výsledku pokusu o vyhození předmětu.
+     */
     @Override
     public String execute() {
         lokace = svet.getCurrentPosition();
-        System.out.println("choose which item you want to throw away");
+        System.out.println("Choose which item from your inventory: " + inventar.getFormattedItems() + " you want to throw away");
         String itemName = sc.nextLine();
         if (inventar.removeItem(itemName)) {
             this.item = inventar.containsItem(itemName);
             lokace.addItem(item);
             return "You threw away " + item.getName();
         }
-        return itemName + " isnt in the inventory";
+        return itemName + " isn't in the inventory";
     }
 
     @Override
     public boolean exit() {
         return false;
     }
-
 }

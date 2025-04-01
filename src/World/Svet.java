@@ -1,26 +1,37 @@
 package World;
 
-import java.io.*;
-import java.util.*;
-
 import Belongings.Inventar;
 import Belongings.Item;
 import Characters.Hrac;
 import Characters.Postava;
 
+import java.io.*;
+import java.util.*;
+
+/**
+ * Třída Svet reprezentuje herní svět, který obsahuje různé lokace, kam se může hráč přesouvat.
+ * Třída umožňuje načítání mapy světa z externího souboru a správu přesunů mezi jednotlivými lokacemi.
+ */
 public class Svet {
     private HashMap<Integer, Lokace> world = new HashMap<>();
     private int start = 1;
     private int currentPosition = start;
-    private String test;
 
+    /**
+     * Konstruktor třídy Svet.
+     * Inicializuje svět a pokusí se načíst mapu světa z externího souboru.
+     */
     public Svet() {
-        this.test = "NASTAVUJI TEST NA NEJAKE JMENO";
         if (!loadMap()) {
             System.out.println("Svet load failed");
         }
     }
 
+    /**
+     * Načte mapu světa z externího textového souboru.
+     *
+     * @return true, pokud byla mapa načtena úspěšně, jinak false.
+     */
     public boolean loadMap() {
         try (BufferedReader br = new BufferedReader(new FileReader("hreniSvet2.txt"))) {
             String line;
@@ -43,7 +54,10 @@ public class Svet {
         }
     }
 
-
+    /**
+     * Umožňuje hráči změnit lokaci na základě volby ze seznamu propojených lokací.
+     * V případě, že hráč je opilý, může se stát, že zamíří do jiné lokace, než zamýšlel.
+     */
     public void zmenLokaci() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Random random = new Random();
@@ -77,7 +91,7 @@ public class Svet {
 
             if (choice == 0) {
                 System.out.println("Zůstáváte v aktuální lokaci.");
-                return;
+
             } else if (isValidChoice(choice, connectedLocations)) {
                 double drunkenness = Postava.getDrunkenness();
                 Postava.setDrunkenness(drunkenness - 0.5);
@@ -103,7 +117,13 @@ public class Svet {
         }
     }
 
-
+    /**
+     * Zkontroluje, zda je volba pro změnu lokace platná.
+     *
+     * @param choice Zvolená lokalita.
+     * @param connectedLocations Seznam propojených lokalit.
+     * @return true, pokud je volba platná, jinak false.
+     */
     private boolean isValidChoice(int choice, int[] connectedLocations) {
         for (int loc : connectedLocations) {
             if (loc == choice) {
@@ -113,6 +133,9 @@ public class Svet {
         return false;
     }
 
+    /**
+     * Ověří, zda hráč nasbíral všechny požadované předměty a otevře přístup do konečné lokace.
+     */
     public void finalLocation() {
         Inventar inventar = Hrac.getInventar();
         if (inventar.allItemsCollected()) {
@@ -120,7 +143,11 @@ public class Svet {
         }
     }
 
-
+    /**
+     * Získá aktuální lokaci podle jejího ID.
+     *
+     * @return Aktuální Lokace.
+     */
     public Lokace getCurrentPosition() {
         return world.get(currentPosition);
     }
@@ -131,8 +158,6 @@ public class Svet {
 
     @Override
     public String toString() {
-        return "Svet{" +
-                "test='" + test + '\'' +
-                '}';
+        return getWorld().toString();
     }
 }
