@@ -16,7 +16,6 @@ public class ItemRegister {
     public static class ItemRegistry {
         private static final Map<String, Item> itemList = new HashMap<>();
 
-        // Inicializace předdefinovaných předmětů
         static {
             itemList.put("Water", new Item("Water", "drinkable water, adds hydration", SETTINGS.WATER_AMOUNT, 0, SETTINGS.WATER_DRUNKENNESS, true));
             itemList.put("Food", new Item("Food", "eatable food, removes hunger", -1, SETTINGS.FOOD_AMOUNT, SETTINGS.FOOD_DRUNKENNESS, true));

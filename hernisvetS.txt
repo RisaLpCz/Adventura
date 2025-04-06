@@ -1,7 +1,0 @@
-1;HospodskáRuina;2;5;4
-2;OpatstvíSv.Matouše;1;5
-3;ZříceninaKeltskéhoOppida;2
-4;DoupěLichváře Horyny;1;5
-5;LesUMacochy;1;2;4
-6;JeskyněVěčéhoStínu;1;
-

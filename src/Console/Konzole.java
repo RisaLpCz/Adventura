@@ -32,7 +32,7 @@ public class Konzole {
         map.put("goto", new Move(controller));
         map.put("showinventory", new ShowInventory());
         map.put("search", new Search(controller));
-        map.put("stop", new Exit());
+        map.put("stop", new Exit(controller));
         map.put("takeitem", new TakeItem(controller));
         map.put("throwitem", new ThrowItem(controller));
         map.put("interact", new Interact());

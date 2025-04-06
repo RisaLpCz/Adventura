@@ -3,6 +3,7 @@ package Belongings;
 import Characters.Hrac;
 import Characters.Postava;
 import Settings.Controller;
+import Settings.SETTINGS;
 
 /**
  * Reprezentuje předmět ve hře, který může mít různé vlastnosti, například
@@ -70,13 +71,19 @@ public class Item {
      * @param item Předmět k použití.
      */
     public void useItem(Item item) {
-        Postava.setDrink(Postava.getDrink() + item.getDrink());
-        Postava.setFood(Postava.getFood() + item.getFood());
-        Postava.setDrunkenness(Postava.getDrunkenness() + item.getDrunkenness());
+        int newDrink = Postava.getDrink() + item.getDrink();
+        Postava.setDrink(Math.max(0, Math.min(SETTINGS.MAX_HYDRATION, newDrink)));
+
+        int newFood = Postava.getFood() + item.getFood();
+        Postava.setFood(Math.max(0, Math.min(SETTINGS.MAX_FOOD, newFood)));
+
+        double newDrunkenness = Postava.getDrunkenness() + item.getDrunkenness();
+        Postava.setDrunkenness(Math.max(0.0, newDrunkenness));
+
         Hrac.getInventar().removeItem(item);
     }
 
-    // Gettery a settery
+
 
     public int getDrunkenness() {
         return drunkenness;

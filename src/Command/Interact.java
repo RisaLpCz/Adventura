@@ -26,7 +26,7 @@ public class Interact implements Command {
     @Override
     public String execute() {
         Inventar inventar = Hrac.getInventar();
-        System.out.println("Choose which item you want to use");
+        System.out.println("Choose which item you want to use: " + inventar.getFormattedItems());
         Item item = inventar.containsItem(scanner.nextLine());
 
         if (item != null && item.isUseable()) {

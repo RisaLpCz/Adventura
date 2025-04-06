@@ -12,28 +12,28 @@ import java.util.List;
 public class Lokace {
     private String name;
     private int ID;
-    private int[] locations;
+    private ArrayList<Integer> locations;
     private ArrayList<Item> lokaceItems;
+    private boolean searched;
 
     /**
      * Konstruktor třídy Lokace.
      *
      * @param name Název lokace.
      * @param ID Jedinečné ID lokace.
-     * @param locations Seznam sousedních lokací (určeno jejich ID).
+     * @param locationsStr Seznam sousedních lokací (určeno jejich ID).
      * @param items Seznam názvů položek, které jsou k dispozici v této lokaci.
      */
-    public Lokace(String name, int ID, String[] locations, String[] items) {
+    public Lokace(String name, int ID, String[] locationsStr, String[] items) {
         this.name = name;
         this.ID = ID;
+        this.searched = false;
+        this.locations = new ArrayList<>();
 
-        if (locations != null && locations.length > 0) {
-            this.locations = new int[locations.length];
-            for (int i = 0; i < locations.length; i++) {
-                this.locations[i] = Integer.parseInt(locations[i].trim());
+        if (locationsStr != null && locationsStr.length > 0) {
+            for (String loc : locationsStr) {
+                this.locations.add(Integer.parseInt(loc.trim()));
             }
-        } else {
-            this.locations = new int[0];
         }
 
         this.lokaceItems = new ArrayList<>();
@@ -90,8 +90,18 @@ public class Lokace {
         }
     }
 
+    public void addLocation(int id) {
+        if (!locations.contains(id)) {
+            locations.add(id);
+        }
+    }
+
+    public boolean containsLocations(int id) {
+        return locations.contains(id);
+    }
+
     public int[] getLocations() {
-        return locations;
+        return locations.stream().mapToInt(Integer::intValue).toArray();
     }
 
     public ArrayList<Item> getItems() {
@@ -122,6 +132,14 @@ public class Lokace {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isSearched() {
+        return searched;
+    }
+
+    public void setSearched(boolean searched) {
+        this.searched = searched;
     }
 
     @Override

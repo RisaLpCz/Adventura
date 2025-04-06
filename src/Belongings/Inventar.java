@@ -83,9 +83,9 @@ public class Inventar {
      * @return pokud jsou všechny klíčové předměty v inventáři, jinak.
      */
     public boolean allItemsCollected() {
-        return containsItem("Map") != null &&
+        return containsItem("Old Map") != null &&
                 containsItem("Note in a bottle") != null &&
-                containsItem("Celtic symbols") != null &&
+                containsItem("Symbols") != null &&
                 containsItem("Bison hoof") != null;
     }
 

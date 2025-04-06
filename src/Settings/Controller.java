@@ -1,11 +1,7 @@
 package Settings;
 
-import Belongings.Inventar;
-import Belongings.ItemRegister;
 import Characters.Hrac;
-import Characters.Nepritel;
 import Characters.Postava;
-import Console.Konzole;
 import World.Svet;
 
 import java.util.Scanner;
@@ -20,8 +16,8 @@ public class Controller {
     Scanner scan = new Scanner(System.in);
 
     private Hrac hrac;
-    private Nepritel nepritel;
     private Svet svet;
+    private Statistics stats;
 
     /**
      * Konstruktor třídy Controller.
@@ -31,24 +27,23 @@ public class Controller {
     }
 
     /**
-     * Inicializuje hru, vytváří objekty hráče, nepřítele, světa a nastavuje počáteční stav.
+     * Inicializuje hru, vytváří objekty hráče, statistiky, světa a nastavuje počáteční stav.
      */
     public void incialization() {
         hrac = new Hrac(scan.nextLine());
-        nepritel = new Nepritel();
         svet = new Svet();
+        stats = new Statistics();
         Postava.postava();
-    }
-
-    public Hrac getHrac() {
-        return hrac;
-    }
-
-    public Nepritel getNepritel() {
-        return nepritel;
     }
 
     public Svet getSvet() {
         return svet;
+    }
+
+    public Statistics getStats() {
+        if (stats == null) {
+            System.out.println("KURVA NEGR!!");
+        }
+        return stats;
     }
 }
