@@ -52,11 +52,11 @@ public class TakeItem implements Command {
         if (item != null && !inventar.isFull()) {
             lokace.removeItem(item);
             inventar.addItem(item);
-            return "You added " + item.getName() + " to your inventory";
+            return "Přidal jste " + item.getName() + " do vašeho inventáře";
         } else if (inventar.isFull()) {
-            return "Your inventory is full";
+            return "Váš inventář je plný";
         }
-        return "Item couldn't be added to your inventory";
+        return "Předmět nemohl být přidán do inventáře";
     }
 
     /**
@@ -68,10 +68,10 @@ public class TakeItem implements Command {
      * @throws IOException Pokud předmět v lokaci není nalezen.
      */
     public Item chooseItem() throws IOException {
-        System.out.println("Items in your location: " + lokace.getItems() + " please choose an item :");
+        System.out.println("Předměty ve vaší lokaci: " + lokace.getItems() + " prosím vyberte si předmět :");
         String itemName = scanner.nextLine();
         if (lokace.containsItem(itemName) == null) {
-            throw new IOException("Item " + itemName + " not found");
+            throw new IOException("Předmet " + itemName + " nebyl nalezen");
         }
         setItem(lokace.containsItem(itemName));
         return item;

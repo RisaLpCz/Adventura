@@ -26,14 +26,14 @@ public class Interact implements Command {
     @Override
     public String execute() {
         Inventar inventar = Hrac.getInventar();
-        System.out.println("Choose which item you want to use: " + inventar.getFormattedItems());
+        System.out.println("Vyberte předmět, který chete použít: " + inventar.getFormattedItems());
         Item item = inventar.containsItem(scanner.nextLine());
 
         if (item != null && item.isUseable()) {
             item.useItem(item);
-            return "You have used " + item.getName() + " your current state is: " + Postava.playerStete();
+            return "Použil jste " + item.getName() + " váš stav je: " + Postava.playerStete();
         }
-        return "Item not found";
+        return "předmět nenalezen";
     }
 
     @Override

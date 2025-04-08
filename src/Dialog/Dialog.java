@@ -10,12 +10,16 @@ public class Dialog {
     private final String jmenoPostavy;
     private final String popis;
     private final String replika;
+    private final String ukol;
+    private boolean read;
     private HashMap<Integer, Dialog> dialogy = new HashMap<>();
 
-    public Dialog(String jmenoPostavy, String popis, String replika) {
+    public Dialog(String jmenoPostavy, String popis, String replika, String ukol) {
         this.jmenoPostavy = jmenoPostavy;
         this.popis = popis;
         this.replika = replika;
+        this.ukol = ukol;
+        this.read = false;
     }
 
     public String getJmeno() {
@@ -30,28 +34,31 @@ public class Dialog {
         return replika;
     }
 
-    public String vypisDialog() {
-        return jmenoPostavy + popis + jmenoPostavy + ": \"" + replika;
+    public boolean isRead() {
+        return read;
     }
 
-    public boolean loadDialogy() {
-        try (BufferedReader br = new BufferedReader(new FileReader("dialogyPostavy.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.trim().isEmpty()) continue;
+    public void setRead(boolean read) {
+        this.read = read;
+    }
 
-                String[] parts = line.split(";", 4);
-                int locationID = Integer.parseInt(parts[0].trim());
-                String jmeno = parts[1].trim();
-                String popis = parts[2].trim();
-                String replika = parts[3].trim();
+    public String getUkol() {
+        return ukol;
+    }
 
-                dialogy.put(locationID, new Dialog(jmeno, popis, replika));
-            }
-            return true;
-        } catch (IOException e) {
-            System.out.println("Chyba při načítání: " + e.getMessage());
-            return false;
-        }
+    public String vypisDialog() {
+        return "\n======================================\n"
+                + "👤 " + jmenoPostavy + "\n"
+                + "📜 " + popis + "\n\n"
+                + jmenoPostavy + ": \"" + replika + "\""
+                + "\n======================================\n";
+    }
+
+    public String vypisUkol() {
+        return "\n======================================\n"
+                + "Od " + jmenoPostavy + " jsi se dozvěděl následující" + "\n"
+                + " " + "" + "\n\n"
+                + ukol + "\""
+                + "\n======================================\n";
     }
 }

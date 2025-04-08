@@ -24,10 +24,9 @@ public class Konzole {
      */
     public void inicialization() {
         controller = new Controller();
-        System.out.println("Type your name: ");
         controller.incialization();
         controller.getSvet().loadMap();
-
+        controller.getDialogLoader().nactiDialogy();
 
         map.put("goto", new Move(controller));
         map.put("showinventory", new ShowInventory());
@@ -45,6 +44,14 @@ public class Konzole {
      * Pokud příkaz není definován, informuje uživatele o neznámém příkazu.
      */
     public void doCommand() {
+        System.out.println("Co si přejete udělat: ");
+        System.out.println("Pro změnu lokace napište 'goto'" +
+                "\npro zobrazení inventáře napište 'showinventory'," +
+                "\npro hledání předmětů v lokaci napište 'search'," +
+                "\npro sebrání předmětu napište 'takeitem'," +
+                "\npro zahození předmětu napište 'throwitem'," +
+                "\npro použití předmětu napišřte 'interact'" +
+                "\na pro ukončení hry napište 'stop'");
         System.out.print(">>");
         String command = scanner.nextLine();
         command = command.trim().toLowerCase();
@@ -55,7 +62,7 @@ public class Konzole {
                 System.out.println(e.getMessage());
             }
         } else {
-            System.out.println(">> Nondefined command");
+            System.out.println(">> Neidentifikovatelný příkaz");
         }
     }
 
@@ -65,6 +72,9 @@ public class Konzole {
      */
     public void start() {
         inicialization();
+        String uvodniText = Text.loadFile();
+        System.out.println(uvodniText);
+        Hrac hrac = new Hrac(scanner.nextLine());
         try {
             do {
                 doCommand();

@@ -44,9 +44,9 @@ public class Search implements Command {
         }
 
         if (!lokace.getItems().isEmpty()) {
-            return "You have found these items " + lokace.getItems();
+            return "Našel jste tyto předměty " + lokace.getItems();
         }
-        return "No items found";
+        return "Žádné předmety nalezeny";
     }
 
     @Override

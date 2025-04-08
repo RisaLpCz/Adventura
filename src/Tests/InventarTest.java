@@ -1,6 +1,7 @@
-package Belongings;
+package Tests;
 
-import org.junit.jupiter.api.Assertions.*;
+import Belongings.Inventar;
+import Belongings.Item;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;

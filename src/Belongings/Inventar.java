@@ -90,6 +90,17 @@ public class Inventar {
     }
 
     /**
+     * Odstraní, všechny důležité předměty, které hráč nasbíral.
+     *
+     */
+    public void removeMainItems() {
+        removeItem("Old Map");
+        removeItem("Note in a bottle");
+        removeItem("Symbols");
+        removeItem("Bison hoof");
+    }
+
+    /**
      * Ověří, zda je inventář prázdný.
      *
      * @return pokud je inventář prázdný, jinak.
@@ -114,7 +125,7 @@ public class Inventar {
      */
     public String getFormattedItems() {
         if (items.isEmpty()) {
-            return "Inventory is empty";
+            return "Inventář je prázdný";
         }
 
         HashMap<String, Integer> itemCounts = new HashMap<>();

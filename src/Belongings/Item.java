@@ -45,8 +45,8 @@ public class Item {
      * @param amount Množství peněz.
      */
     public Item(int amount) {
-        setName("Money");
-        setDescription("Adds some coins to your wallet");
+        setName("Peníze");
+        setDescription("Přidá obnost peněz do vaší peněženky");
         setAmount(amount);
         this.isMoney = true;
     }

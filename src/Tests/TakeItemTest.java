@@ -1,6 +1,7 @@
-package Command;
+package Tests;
 
 import Belongings.Item;
+import Command.TakeItem;
 import Settings.Controller;
 import org.junit.jupiter.api.Test;
 

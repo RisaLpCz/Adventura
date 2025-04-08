@@ -5,6 +5,7 @@ import Belongings.Item;
 import Characters.Hrac;
 import Characters.Postava;
 import Command.Exit;
+import Dialog.DialogLoader;
 import Settings.Controller;
 
 import java.io.*;
@@ -19,6 +20,7 @@ public class Svet {
     private int start = 1;
     private int currentPosition = start;
     private Controller controller;
+    private DialogLoader dialogLoader;
 
     /**
      * Konstruktor třídy Svet.
@@ -27,7 +29,7 @@ public class Svet {
     public Svet() {
         controller = new Controller();
         if (!loadMap()) {
-            System.out.println("Svet load failed");
+            System.out.println("Načtení světa selhalo");
         }
     }
 
@@ -111,7 +113,6 @@ public class Svet {
                     choice = connectedLocations[random.nextInt(connectedLocations.length)];
                     System.out.println("Zavrávorali jste a nechtěně jste se vydali jinam...");
                 }
-
                 currentPosition = choice;
                 System.out.println("Přesouváte se do lokace " + choice);
             } else {
@@ -120,7 +121,6 @@ public class Svet {
         } catch (IOException | NumberFormatException e) {
             System.out.println("Chyba při čtení vstupu. Zkuste to znovu.");
         }
-        encounterWithCreditor();
     }
 
     /**
@@ -155,7 +155,6 @@ public class Svet {
         return false;
     }
 
-
     /**
      * Ověří, zda hráč nasbíral všechny požadované předměty a otevře přístup do konečné lokace.
      */
@@ -168,13 +167,13 @@ public class Svet {
 
             if (!containsLocation(loc4, 6)) {
                 loc4.addLocation(6);
-                System.out.println("Speciální lokace 6 byla zpřístupněna z lokace 4!");
             }
 
             if (!containsLocation(loc5, 6)) {
                 loc5.addLocation(6);
-                System.out.println("Speciální lokace 6 byla zpřístupněna z lokace 5!");
             }
+            System.out.println("Všechny potřebné předměty byli nalezeny!");
+            System.out.println("Vydej se nyní do doupěte lichváře Horyny nebo Lesa u Macochy a otveři jeskyni věčného stínu!");
         }
     }
 
@@ -246,9 +245,85 @@ public class Svet {
         } else if (Postava.getMoney() < 50) {
             System.out.println("Jelikož nemáš dostatek peněz na splátku tak tě věřitel zabil.");
             System.out.println("Hra končí!");
-            exit.execute();
+            System.exit(0);
         }
     }
+
+    /**
+     * Metoda představuje finální zkoušku pro hráče, kde je postaven před rozhodnutí,
+     * které má odpovědět na základě tajemné otázky. Na základě správnosti odpovědi se
+     * hráči otevře cesta dál nebo se musí vrátit a začít znovu.
+     *
+     * Tato metoda zobrazuje otázku a čeká na vstup od hráče. Pokud hráč odpoví správně,
+     * dostane se dál a dostane konečné gratulace za úspěch. Pokud odpoví špatně,
+     * musí zkusit znovu.
+     *
+     * V případě správné odpovědi se hráč dostane k finálnímu prohlášení, které uzavírá jeho cestu
+     * a postupuje k dalšímu dobrodružství.
+     *
+     * @see Exit - pro ukončení a přechod na další část hry
+     */
+    public void finalLocation() {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("„Poslední otázka, poutníku... Před tebou leží dvě cesty. Jedna vede do temnoty, druhá ke světlu.“");
+        System.out.println("Však pozor, jen jeden směr je pravý... Obě cesty jsou ale s nějakým tajemstvím." );
+        System.out.println("\nPřízrak se ztiší a položí otázku:");
+        System.out.println("„Následuj, pokud najdeš odpověď správně. Když na sobě budeš hledat klíč, budeš hledat špatně.“");
+        System.out.println("A otázka zní:");
+
+        System.out.println("Pokud jsi na mostě, a most je o 50 metrů dlouhý, ale ty jsi ho přešel za 20 minut, jak dlouho bude trvat, než most překročíš znovu?");
+
+        System.out.println("1) 20 minut.");
+        System.out.println("2) 40 minut.");
+
+        System.out.print("Zadej svou volbu (1 nebo 2): ");
+
+        String odpoved = scanner.nextLine().trim().toLowerCase();
+
+        switch (odpoved) {
+            case "1":
+                System.out.println("\n💀 Přízrak se ušklíbne: „Tvá odpověď tě vede do temnot. Most jsi přece již přešel...“");
+                break;
+
+            case "2":
+                System.out.println("\n✨ Přízrak pokývne a pomalu se rozzáří kolem tebe světlem...");
+                System.out.println("„Správně, poutníku. Tvá odpověď byla správná, tvé myšlení bylo jasné jako denní světlo!“");
+                System.out.println("🌟 Se zábleskem světla se ti otevírá cesta. Zářící brány jeskyně se pomalu otvírají, a tebe čeká tajemství, které jen málo kdo poznal.");
+                System.out.println("🎉 Tyto dveře se před tebou otvírají dokořán. Pokračuješ v cestě, připraven na novou výzvu!");
+                System.out.println("🔓 Gratulace! Teď se dostáváš dál do tajemného světa, kde tě čekají nové možnosti a zkoušky.");
+
+                System.out.println("\n\n=====================================");
+                System.out.println("🌟🎉 Jsi úspěšný! 🎉🌟");
+                System.out.println("Tvoje odhodlání, odvaha a schopnosti tě dovedly až sem.");
+                System.out.println("Splnil jsi všechny zkoušky a nyní se stáváš legendou.");
+                System.out.println("Tato cesta byla náročná, ale teď víš, že žádná výzva není příliš velká, pokud máš správný směr.");
+                System.out.println("Tvé jméno bude navždy zapsáno mezi hrdiny, kteří zvládli to, co jiní považovali za nemožné.");
+                System.out.println("Nyní je čas oslavit svůj triumf. Vstupuješ do nové éry, kde tě čeká ještě více dobrodružství.");
+                System.out.println("Děkujeme ti za to, že jsi prošel tímto příběhem. Tvé dobrodružství nekončí... ale začíná právě teď.");
+                System.out.println("=====================================");
+                Exit exit = new Exit(controller);
+                exit.execute();
+                break;
+
+            default:
+                System.out.println("\n⚠️ Neplatná odpověď! Zvol 1 nebo 2.");
+                break;
+        }
+
+        System.out.println("\n⛔ Tvá odpověď neuspokojila strážce jeskyně. Věci potřebné k otevření se vrátily zpět na svá místa.");
+        System.out.println("🔁 Získej všechny své věci zpět a zkus to znovu!");
+
+        Hrac.getInventar().removeMainItems();
+
+        for (Lokace lokace : world.values()) {
+            getCurrentPosition().addLocationItems(lokace);
+        }
+
+        currentPosition = random.nextInt(5) + 1;
+    }
+
 
 
 

@@ -1,6 +1,7 @@
-package World;
+package Tests;
 
 import Settings.Controller;
+import World.Svet;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,6 +1,7 @@
 package Command;
 
 import Characters.Postava;
+import Dialog.DialogLoader;
 import Settings.Controller;
 import World.Svet;
 
@@ -14,6 +15,7 @@ public class Move implements Command {
 
     private Controller controller;
     private Svet svet;
+    private DialogLoader dialogLoader;
 
     /**
      * Konstruktor třídy Move.
@@ -24,12 +26,13 @@ public class Move implements Command {
     public Move(Controller controller) {
         this.controller = controller;
         this.svet = controller.getSvet();
+        this.dialogLoader = controller.getDialogLoader();
     }
 
     /**
      * Provádí pohyb postavy na novou lokaci.
      * Změní lokaci postavy a vrátí textovou zprávu o nové lokaci.
-     * Pokud postava dosáhne finální lokace, může být připraven dialog.
+     * Pokud postava dosáhne finální lokace, spustí finalní metodu.
      *
      * @return Zpráva o aktuální lokaci hráče.
      */
@@ -37,13 +40,15 @@ public class Move implements Command {
     public String execute() {
         svet = controller.getSvet();
         svet.zmenLokaci();
+        System.out.println(dialogLoader.vypisDialog(svet.getCurrentPosition().getID()));
+        svet.encounterWithCreditor();
+
 
         if (svet.getCurrentPosition().getID() == 6) {
-            // Připravit finální dialog (až budou dialogy dokončeny)
-            // Možná přidat k lokaci boolean open, aby byla označena jako otevřená.
+            svet.finalLocation();
         }
 
-        return "Your current location is " + svet.getCurrentPosition();
+        return "Nacházíte se v " + svet.getCurrentPosition();
     }
 
     @Override

@@ -44,14 +44,14 @@ public class ThrowItem implements Command {
     @Override
     public String execute() {
         lokace = svet.getCurrentPosition();
-        System.out.println("Choose which item from your inventory: " + inventar.getFormattedItems() + " you want to throw away");
+        System.out.println("Vyberte si předmět z vašeho inventáře: " + inventar.getFormattedItems() + " který z nich chete zahodnit?");
         String itemName = sc.nextLine();
         if (inventar.removeItem(itemName)) {
             this.item = inventar.containsItem(itemName);
             lokace.addItem(item);
-            return "You threw away " + item.getName();
+            return "Zahodil jste " + item.getName();
         }
-        return itemName + " isn't in the inventory";
+        return itemName + " není ve vašem inventáři";
     }
 
     @Override

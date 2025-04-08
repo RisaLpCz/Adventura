@@ -2,6 +2,7 @@ package Settings;
 
 import Characters.Hrac;
 import Characters.Postava;
+import Dialog.DialogLoader;
 import World.Svet;
 
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class Controller {
     private Hrac hrac;
     private Svet svet;
     private Statistics stats;
+    private DialogLoader dialogLoader;
 
     /**
      * Konstruktor třídy Controller.
@@ -27,12 +29,12 @@ public class Controller {
     }
 
     /**
-     * Inicializuje hru, vytváří objekty hráče, statistiky, světa a nastavuje počáteční stav.
+     * Inicializuje hru, vytváří objekty hráče, statistiky, dialogu, světa a nastavuje počáteční stav.
      */
     public void incialization() {
-        hrac = new Hrac(scan.nextLine());
-        svet = new Svet();
         stats = new Statistics();
+        dialogLoader = new DialogLoader(stats);
+        svet = new Svet();
         Postava.postava();
     }
 
@@ -41,9 +43,10 @@ public class Controller {
     }
 
     public Statistics getStats() {
-        if (stats == null) {
-            System.out.println("KURVA NEGR!!");
-        }
         return stats;
+    }
+
+    public DialogLoader getDialogLoader() {
+        return this.dialogLoader;
     }
 }

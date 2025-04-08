@@ -1,6 +1,7 @@
-package World;
+package Tests;
 
 import Belongings.Item;
+import World.Lokace;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

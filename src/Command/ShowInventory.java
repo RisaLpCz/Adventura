@@ -24,9 +24,9 @@ public class ShowInventory implements Command {
     @Override
     public String execute() {
         if (!inventar.getFormattedItems().isEmpty()) {
-            return "You have " + inventar.getFormattedItems() + " in your inventory and your state is " + Postava.playerStete();
+            return "Máte v inventáři " + inventar.getFormattedItems() + " a váš stav je " + Postava.playerStete();
         }
-        return "Your inventory is empty";
+        return "Váš inventář je prázdný";
     }
 
     @Override
